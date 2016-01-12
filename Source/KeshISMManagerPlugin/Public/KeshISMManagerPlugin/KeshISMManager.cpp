@@ -49,6 +49,33 @@ bool UKeshISMManager::AddInstance( UKeshISMComponent* KeshISMComponent )
 
 	KeshISMComponent->Index = ComponentData->ISMComponent->AddInstanceWorldSpace( KeshISMComponent->GetComponentTransform() );
 	ComponentData->ISMComponent->MarkRenderStateDirty();
+	ComponentData->ISMComponent->SetVisibility( false, true );
+	ComponentData->ISMComponent->SetVisibility( true, true );
+
+	AKeshISMActor* KeshISMActor = Cast<AKeshISMActor>( ComponentData->ISMComponent->GetOwner() );
+
+	if ( KeshISMActor != NULL )
+	{
+		FKeshISMManagerChannelList* Channel = NULL;
+
+		for ( FKeshISMManagerChannelList& ChannelData : KeshISMActor->Channels )
+		{
+			if ( ChannelData.Channel != KeshISMComponent->Channel )
+				continue;
+
+			Channel = &ChannelData;
+			break;
+		}
+
+		if ( Channel == NULL )
+		{
+			KeshISMActor->Channels.Add( FKeshISMManagerChannelList( KeshISMComponent->Channel ) );
+			Channel = &( KeshISMActor->Channels[ KeshISMActor->Channels.Num() - 1 ] );
+		}
+
+		if ( !Channel->ISMComponents.Contains( ComponentData->ISMComponent ) )
+			Channel->ISMComponents.Add( ComponentData->ISMComponent.Get() );
+	}
 
 	if ( KeshISMComponent->Index < 0 )
 		return false;
@@ -89,6 +116,8 @@ bool UKeshISMManager::UpdateInstanceTransform( UKeshISMComponent* KeshISMCompone
 
 	ComponentData->ISMComponent->UpdateInstanceTransform( KeshISMComponent->Index, KeshISMComponent->GetComponentTransform(), true, true );
 	ComponentData->ISMComponent->MarkRenderStateDirty();
+	ComponentData->ISMComponent->SetVisibility( false, true );
+	ComponentData->ISMComponent->SetVisibility( true, true );
 	
 	return true;
 }
@@ -201,6 +230,8 @@ bool UKeshISMManager::RemoveInstance( UKeshISMComponent* KeshISMComponent )
 
 		ComponentData->ISMComponent->RemoveInstance( LastIndex );
 		ComponentData->ISMComponent->MarkRenderStateDirty();
+		ComponentData->ISMComponent->SetVisibility( false, true );
+		ComponentData->ISMComponent->SetVisibility( true, true );
 
 		ComponentData->KeshISMComponents.SetNum( LastIndex );
 	}
