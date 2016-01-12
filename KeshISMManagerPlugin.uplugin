@@ -1,0 +1,20 @@
+{
+  "FileVersion": 3,
+
+  "FriendlyName": "Kesh Instance Static Mesh Manager Plugin",
+  "Version": 1,
+  "VersionName": "1.0",
+  "Description": "An Instance Static Mesh Manager to allow more optimization of static meshes without dealing with the ISM actors directly.",
+  "Category": "Kesh.Rendering",
+  "CreatedBy": "Matthew 'Daekesh' Chapman'",
+  "CanContainContent": false,
+  "EnabledByDefault": true,
+
+  "Modules": [
+    {
+      "Name": "KeshISMManagerPlugin",
+      "Type": "Runtime",
+      "LoadingPhase": "PreDefault"
+    }
+  ]
+}
