@@ -37,6 +37,8 @@ public:
 
 	virtual void PostLoad() override;
 	virtual void OnRegister() override;
+	virtual void BeginPlay() override;
+	virtual void TickComponent( float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 	virtual void OnComponentDestroyed() override;
 
 protected:
@@ -44,6 +46,9 @@ protected:
 	friend class UKeshISMManager;
 
 	int32 Index;
+
+	UPROPERTY( Category = "Kesh ISM Manager|Component", EditAnywhere )
+	bool bUpdateDuringPlay;
 
 	UPROPERTY( Category = "Kesh ISM Manager|Component", EditAnywhere )
 	FName Channel;

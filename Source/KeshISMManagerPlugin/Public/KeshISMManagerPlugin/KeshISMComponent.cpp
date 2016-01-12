@@ -16,6 +16,12 @@ UKeshISMComponent::UKeshISMComponent( const class FObjectInitializer& ObjectInit
 	Channel = FKeshISMComponent::DefaultChannel;
 	Mesh = NULL;
 	MaterialOverrides.SetNum( 0 );
+	bUpdateDuringPlay = false;
+
+	PrimaryComponentTick.bCanEverTick = true;
+	bTickInEditor = true;
+	bAutoActivate = true;
+	bAllowConcurrentTick = true;
 }
 
 
@@ -89,6 +95,26 @@ void UKeshISMComponent::OnRegister()
 
 	UKeshISMManager* Manager = UKeshISMManager::GetInstance();
 	Manager->AddInstance( this );
+}
+
+
+void UKeshISMComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SetComponentTickEnabled( bUpdateDuringPlay );
+}
+
+
+void UKeshISMComponent::TickComponent( float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+{
+	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+	
+	if ( !bUpdateDuringPlay )
+		return;
+
+	UKeshISMManager* Manager = UKeshISMManager::GetInstance();
+	Manager->UpdateInstanceTransform( this );
 }
 
 
