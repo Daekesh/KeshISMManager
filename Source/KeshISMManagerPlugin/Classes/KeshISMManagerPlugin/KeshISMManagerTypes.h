@@ -89,7 +89,7 @@ struct FKeshISMManagerChannelList
 {
 	GENERATED_BODY()
 
-	FKeshISMManagerChannelList( FName Channel = FName( TEXT( "Default" ) ) )
+	FKeshISMManagerChannelList( FName Channel = NAME_Default )
 	{
 		this->Channel = Channel;
 		ISMComponents.SetNum( 0 );

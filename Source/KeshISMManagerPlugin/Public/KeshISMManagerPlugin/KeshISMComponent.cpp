@@ -4,16 +4,11 @@
 #include "KeshISMManagerPlugin/KeshISMManager.h"
 #include "KeshISMManagerPlugin/KeshISMComponent.h"
 
-namespace FKeshISMComponent
-{
-	FName DefaultChannel = FName( TEXT( "Default" ) );
-}
-
 
 UKeshISMComponent::UKeshISMComponent( const class FObjectInitializer& ObjectInitializer )
 {
 	Index = -1;
-	Channel = FKeshISMComponent::DefaultChannel;
+	Channel = NAME_Default;
 	Mesh = NULL;
 	MaterialOverrides.SetNum( 0 );
 	bUpdateDuringPlay = false;

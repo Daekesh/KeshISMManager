@@ -93,6 +93,56 @@ bool UKeshISMManager::AddInstance( UKeshISMComponent* KeshISMComponent )
 
 bool UKeshISMManager::UpdateInstance( UKeshISMComponent* KeshISMComponent )
 {
+	if ( KeshISMComponent == NULL )
+		return false;
+
+	if ( KeshISMComponent->Index < 0 )
+		return AddInstance( KeshISMComponent );
+
+	if ( KeshISMComponent->Mesh == NULL )
+		return false;
+
+	bool bUpdateTransformOnly = true;
+
+	if ( KeshISMComponent->ChannelComponent == NULL )
+		bUpdateTransformOnly = false;
+
+	else if ( KeshISMComponent->ChannelComponent->StaticMesh != KeshISMComponent->Mesh )
+		bUpdateTransformOnly = false;
+
+	else if ( KeshISMComponent->ChannelComponent->GetNumOverrideMaterials() != KeshISMComponent->MaterialOverrides.Num() )
+		bUpdateTransformOnly = false;
+
+	else
+	{
+		for ( int32 i = 0, length = KeshISMComponent->ChannelComponent->GetNumOverrideMaterials(); i < length; ++i )
+		{
+			if ( KeshISMComponent->ChannelComponent->GetMaterial( i ) == KeshISMComponent->MaterialOverrides[ i ] )
+				continue;
+
+			bUpdateTransformOnly = false;
+			break;
+		}
+
+		if ( bUpdateTransformOnly )
+		{
+			FName ISMChannel = NAME_None;
+			AKeshISMActor* KeshISMActor = Cast<AKeshISMActor>( KeshISMComponent->ChannelComponent->GetOwner() );
+
+			if ( KeshISMActor == NULL )
+				bUpdateTransformOnly = false;
+
+			else if ( !GetISMChannel( KeshISMActor, KeshISMComponent->ChannelComponent, ISMChannel, false ) )
+				bUpdateTransformOnly = false;
+
+			else
+				bUpdateTransformOnly = ( ISMChannel == KeshISMComponent->Channel );
+		}
+	}
+
+	if ( bUpdateTransformOnly )
+		return UpdateInstanceTransform( KeshISMComponent );
+
 	RemoveInstance( KeshISMComponent );
 	return AddInstance( KeshISMComponent );
 }
@@ -109,15 +159,13 @@ bool UKeshISMManager::UpdateInstanceTransform( UKeshISMComponent* KeshISMCompone
 	if ( KeshISMComponent->Mesh == NULL )
 		return false;
 
-	FKeshISMManagerComponentData* ComponentData = GetComponentData( KeshISMComponent, false );
+	if ( KeshISMComponent->ChannelComponent == NULL )
+		return;
 
-	if ( ComponentData == NULL )
-		return false;
-
-	ComponentData->ISMComponent->UpdateInstanceTransform( KeshISMComponent->Index, KeshISMComponent->GetComponentTransform(), true, true );
-	ComponentData->ISMComponent->MarkRenderStateDirty();
-	ComponentData->ISMComponent->SetVisibility( false, true );
-	ComponentData->ISMComponent->SetVisibility( true, true );
+	KeshISMComponent->ChannelComponent->UpdateInstanceTransform( KeshISMComponent->Index, KeshISMComponent->GetComponentTransform(), true, true );
+	KeshISMComponent->ChannelComponent->MarkRenderStateDirty();
+	KeshISMComponent->ChannelComponent->SetVisibility( false, true );
+	KeshISMComponent->ChannelComponent->SetVisibility( true, true );
 	
 	return true;
 }
