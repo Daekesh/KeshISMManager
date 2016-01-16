@@ -97,7 +97,7 @@ void UKeshISMComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetComponentTickEnabled( bUpdateDuringPlay );
+	SetComponentTickEnabled( bUpdateDuringPlay || GetWorld()->WorldType == EWorldType::Editor );
 }
 
 
@@ -105,7 +105,7 @@ void UKeshISMComponent::TickComponent( float DeltaTime, enum ELevelTick TickType
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 	
-	if ( !bUpdateDuringPlay )
+	if ( !bUpdateDuringPlay && GetWorld()->WorldType != EWorldType::Editor )
 		return;
 
 	UKeshISMManager* Manager = UKeshISMManager::GetInstance();

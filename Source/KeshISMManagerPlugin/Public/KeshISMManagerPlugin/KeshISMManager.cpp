@@ -160,7 +160,7 @@ bool UKeshISMManager::UpdateInstanceTransform( UKeshISMComponent* KeshISMCompone
 		return false;
 
 	if ( KeshISMComponent->ChannelComponent == NULL )
-		return;
+		return false;
 
 	KeshISMComponent->ChannelComponent->UpdateInstanceTransform( KeshISMComponent->Index, KeshISMComponent->GetComponentTransform(), true, true );
 	KeshISMComponent->ChannelComponent->MarkRenderStateDirty();
@@ -613,6 +613,7 @@ FKeshISMManagerComponentData* UKeshISMManager::GetComponentData( AKeshISMActor* 
 		return NULL;
 
 	UInstancedStaticMeshComponent* ISMComponent = NewObject<UInstancedStaticMeshComponent>( KeshISMActor );
+	ISMComponent->RegisterComponent();
 
 	if ( ISMComponent == NULL )
 		return NULL;
