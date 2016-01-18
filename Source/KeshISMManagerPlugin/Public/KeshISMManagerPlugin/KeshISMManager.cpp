@@ -39,7 +39,7 @@ bool UKeshISMManager::AddInstance( UKeshISMComponent* KeshISMComponent )
 	if ( KeshISMComponent->Index >= 0 )
 		return UpdateInstance( KeshISMComponent );
 
-	FKeshISMManagerComponentData* ComponentData = GetComponentData( KeshISMComponent );
+	FKeshISMManagerComponentData* ComponentData = GetComponentData( KeshISMComponent, true );
 
 	if ( ComponentData == NULL )
 		return false;
@@ -143,7 +143,9 @@ bool UKeshISMManager::UpdateInstance( UKeshISMComponent* KeshISMComponent )
 	if ( bUpdateTransformOnly )
 		return UpdateInstanceTransform( KeshISMComponent );
 
-	RemoveInstance( KeshISMComponent );
+	if ( !RemoveInstance( KeshISMComponent ) )
+		return false;
+
 	return AddInstance( KeshISMComponent );
 }
 
@@ -179,28 +181,46 @@ bool UKeshISMManager::RemoveInstance( UKeshISMComponent* KeshISMComponent )
 	if ( KeshISMComponent->Index < 0 )
 		return false;
 
-	if ( KeshISMComponent->Mesh == NULL )
+	if ( KeshISMComponent->ChannelComponent == NULL )
+		return false;
+		
+	if ( KeshISMComponent->ChannelComponent->StaticMesh == NULL )
 		return false;
 	
 	if ( KeshISMComponent->GetWorld() == NULL )
-		return NULL;
+		return false;
+
+	AKeshISMActor* KeshIRCActor = Cast<AKeshISMActor>( KeshISMComponent->ChannelComponent->GetOwner() );
+
+	if ( KeshIRCActor == NULL )
+		return false;
+
+	FName Channel = NAME_None;
+		
+	if ( !GetISMChannel( KeshIRCActor, KeshISMComponent->ChannelComponent, Channel, false ) )
+		return false;
 
 	FKeshISMManagerWorldData* WorldData = GetWorldData( KeshISMComponent->GetWorld(), false );
 
 	if ( WorldData == NULL )
 		return false;
 
-	FKeshISMManagerChannel* ChannelData = GetChannelData( *WorldData, KeshISMComponent->Channel, false );
+	FKeshISMManagerChannel* ChannelData = GetChannelData( *WorldData, Channel, false );
 
 	if ( ChannelData == NULL )
 		return false;
 
-	FKeshISMManagerChannelMesh* MeshData = GetMeshData( *ChannelData, KeshISMComponent->Mesh, false );
+	FKeshISMManagerChannelMesh* MeshData = GetMeshData( *ChannelData, KeshISMComponent->ChannelComponent->StaticMesh, false );
 
 	if ( MeshData == NULL )
 		return false;
 
-	FKeshISMManagerComponentData* ComponentData = GetComponentData( WorldData->KeshISMActor, KeshISMComponent->Channel, KeshISMComponent->Mesh, *MeshData, KeshISMComponent->MaterialOverrides, false );
+	TArray<UMaterialInterface*> ISMMaterialOverrides;
+
+	for ( int32 i = 0; i < KeshISMComponent->ChannelComponent->GetNumOverrideMaterials(); ++i )
+		ISMMaterialOverrides.Add( KeshISMComponent->ChannelComponent->GetMaterial( i ) );
+
+	FKeshISMManagerComponentData* ComponentData = GetComponentData( WorldData->KeshISMActor, Channel, KeshISMComponent->ChannelComponent->StaticMesh, *MeshData, ISMMaterialOverrides, false );
 
 	if ( ComponentData == NULL )
 		return false;
@@ -208,31 +228,31 @@ bool UKeshISMManager::RemoveInstance( UKeshISMComponent* KeshISMComponent )
 	if ( KeshISMComponent->Index >= ComponentData->KeshISMComponents.Num() )
 		return false;
 
-	if ( WorldData->KeshISMActor != NULL )
-	{
-		int32 Index = INDEX_NONE;
-
-		for ( int32 i = 0, length = WorldData->KeshISMActor->Channels.Num(); i < length; ++i )
-		{
-			if ( WorldData->KeshISMActor->Channels[ i ].Channel != KeshISMComponent->Channel )
-				continue;
-
-			Index = i;
-			break;
-		}
-
-		if ( Index != INDEX_NONE )
-		{
-			WorldData->KeshISMActor->Channels[ Index ].ISMComponents.Remove( ComponentData->ISMComponent.Get() );
-
-			if ( WorldData->KeshISMActor->Channels[ Index ].ISMComponents.Num() == 0 )
-				WorldData->KeshISMActor->Channels.RemoveAt( Index, 1, true );
-		}
-	}
-
 	// Remove component data and possibly entire chain.
 	if ( ComponentData->KeshISMComponents.Num() == 1 )
 	{
+		if ( WorldData->KeshISMActor != NULL )
+		{
+			int32 Index = INDEX_NONE;
+
+			for ( int32 i = 0, length = WorldData->KeshISMActor->Channels.Num(); i < length; ++i )
+			{
+				if ( WorldData->KeshISMActor->Channels[ i ].Channel != Channel )
+					continue;
+
+				Index = i;
+				break;
+			}
+
+			if ( Index != INDEX_NONE )
+			{
+				WorldData->KeshISMActor->Channels[ Index ].ISMComponents.Remove( ComponentData->ISMComponent.Get() );
+
+				if ( WorldData->KeshISMActor->Channels[ Index ].ISMComponents.Num() == 0 )
+					WorldData->KeshISMActor->Channels.RemoveAt( Index, 1, true );
+			}
+		}
+
 		ComponentData->ISMComponent->DestroyComponent();
 		ComponentData->ISMComponent = NULL;
 
@@ -250,10 +270,10 @@ bool UKeshISMManager::RemoveInstance( UKeshISMComponent* KeshISMComponent )
 
 			if ( MeshData->ComponentDataList.Num() == 0 && ChannelData != NULL )
 			{
-				ChannelData->MeshList.Remove( KeshISMComponent->Mesh );
+				ChannelData->MeshList.Remove( KeshISMComponent->ChannelComponent->StaticMesh );
 
 				if ( ChannelData->MeshList.Num() == 0 && WorldData != NULL )
-					WorldData->Channels.Remove( KeshISMComponent->Channel );
+					WorldData->Channels.Remove( Channel );
 			}
 		}
 	}
