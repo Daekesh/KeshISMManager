@@ -8,6 +8,8 @@
 AKeshISMActor::AKeshISMActor( const class FObjectInitializer& ObjectInitializer )
 {
 	Channels.SetNum( 0 );
+
+	RootComponent = CreateDefaultSubobject<USceneComponent>( TEXT( "Scene Root" ) );
 }
 
 

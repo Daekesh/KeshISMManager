@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "KeshISMManagerPlugin/KeshISMManagerTypes.h"
+#include "KeshISMManagerPlugin/KeshISMManagerDefs.h"
 #include "KeshISMManager.generated.h"
 
 class UKeshISMComponent;

@@ -2,8 +2,7 @@
 
 #pragma once
 
-//#include "KeshISMManagerPlugin/KeshISMActor.h"
-#include "KeshISMManagerTypes.generated.h"
+#include "KeshISMManagerDefs.generated.h"
 
 #undef NULL
 #define NULL nullptr
@@ -101,4 +100,13 @@ struct FKeshISMManagerChannelList
 	UPROPERTY( Category = "Kesh ISM Manager", VisibleInstanceOnly, Instanced )
 	TArray<UInstancedStaticMeshComponent*> ISMComponents;
 
+};
+
+
+UENUM( BlueprintType )
+enum class EKeshISMPlayUpdateType : uint8
+{
+	UT_None         UMETA( DisplayName = "Do Not Update" ),
+	UT_DisableTick  UMETA( DisplayName = "Disable Ticking" ),
+	UT_ConstantTick UMETA( DisplayName = "Constant Ticking" )
 };
