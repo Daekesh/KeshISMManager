@@ -110,6 +110,7 @@ $(document).ready(function(){initNavTree('class_u_kesh_i_s_m_component.html','')
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_u_kesh_i_s_m_component-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -135,30 +136,39 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5054b0dd6c516d486f3b8c87e63055e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5054b0dd6c516d486f3b8c87e63055e6"></a>
 FName&#160;</td><td class="memItemRight" valign="bottom"><b>GetChannel</b> () const </td></tr>
 <tr class="separator:a5054b0dd6c516d486f3b8c87e63055e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7aa122fdf51775200a21251ac3e90d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e7aa122fdf51775200a21251ac3e90d"></a>
+int32&#160;</td><td class="memItemRight" valign="bottom"><b>GetIndex</b> ()</td></tr>
+<tr class="separator:a2e7aa122fdf51775200a21251ac3e90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35aaf0abe04a0eacae0c03fb26beb4bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35aaf0abe04a0eacae0c03fb26beb4bc"></a>
 UInstancedStaticMeshComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>GetChannelComponent</b> () const </td></tr>
 <tr class="separator:a35aaf0abe04a0eacae0c03fb26beb4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6b954c75146d1783a919fff7b23ada0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae6b954c75146d1783a919fff7b23ada0"></a>
-UStaticMesh *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMesh</b> () const </td></tr>
-<tr class="separator:ae6b954c75146d1783a919fff7b23ada0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae1e5daf0d42388335e2573c304bf996"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae1e5daf0d42388335e2573c304bf996"></a>
+UStaticMesh *&#160;</td><td class="memItemRight" valign="bottom"><b>GetStaticMesh</b> () const </td></tr>
+<tr class="separator:aae1e5daf0d42388335e2573c304bf996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b899b45ada38219282fe78674f828ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b899b45ada38219282fe78674f828ee"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetStaticMesh</b> (UStaticMesh *Mesh)</td></tr>
+<tr class="separator:a6b899b45ada38219282fe78674f828ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5e7d1ab169b9633df42ba0096ac137f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5e7d1ab169b9633df42ba0096ac137f"></a>
 TArray&lt; UMaterialInterface * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaterialOverridesBP</b> () const </td></tr>
 <tr class="separator:ac5e7d1ab169b9633df42ba0096ac137f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02ac3a9c05a7ffc6a8af2cb696083890"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02ac3a9c05a7ffc6a8af2cb696083890"></a>
 const TArray&lt; UMaterialInterface * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaterialOverrides</b> () const </td></tr>
 <tr class="separator:a02ac3a9c05a7ffc6a8af2cb696083890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb9a45a763996ef29b7148431bd720d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fb9a45a763996ef29b7148431bd720d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMaterialOverride</b> (int32 Index, UMaterialInterface *Material)</td></tr>
+<tr class="separator:a7fb9a45a763996ef29b7148431bd720d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7b9434c213c9cdac025439de6dd9562"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7b9434c213c9cdac025439de6dd9562"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PostLoad</b> () override</td></tr>
 <tr class="separator:aa7b9434c213c9cdac025439de6dd9562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab999b72b9a9af94e4b103a74525a2162"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab999b72b9a9af94e4b103a74525a2162"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnRegister</b> () override</td></tr>
 <tr class="separator:ab999b72b9a9af94e4b103a74525a2162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a805329248ad3a60c9c172ff4389801ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a805329248ad3a60c9c172ff4389801ac"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>BeginPlay</b> () override</td></tr>
-<tr class="separator:a805329248ad3a60c9c172ff4389801ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a65ce27500f590ef62182b2703abd3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a65ce27500f590ef62182b2703abd3e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>TickComponent</b> (float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override</td></tr>
 <tr class="separator:a8a65ce27500f590ef62182b2703abd3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4365c7956d9816e8403ebc0b348ebf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e4365c7956d9816e8403ebc0b348ebf"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SendRenderTransform_Concurrent</b> () override</td></tr>
+<tr class="separator:a1e4365c7956d9816e8403ebc0b348ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8979bf5c565b553b0220b35f5d6f11da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8979bf5c565b553b0220b35f5d6f11da"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnComponentDestroyed</b> () override</td></tr>
 <tr class="separator:a8979bf5c565b553b0220b35f5d6f11da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,9 +178,18 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a2e25bdff5c17aa754356e52461456610"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e25bdff5c17aa754356e52461456610"></a>
 int32&#160;</td><td class="memItemRight" valign="bottom"><b>Index</b></td></tr>
 <tr class="separator:a2e25bdff5c17aa754356e52461456610"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f591616314c581d506f1c8449588136"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f591616314c581d506f1c8449588136"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>bUpdateDuringPlay</b></td></tr>
-<tr class="separator:a3f591616314c581d506f1c8449588136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a706dcd682558d592454d05a77ed19c7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a706dcd682558d592454d05a77ed19c7f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>bValidISM</b></td></tr>
+<tr class="separator:a706dcd682558d592454d05a77ed19c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17f0d2c47da8bf2b0760cbb227d0ab75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a17f0d2c47da8bf2b0760cbb227d0ab75"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>bValidTransform</b></td></tr>
+<tr class="separator:a17f0d2c47da8bf2b0760cbb227d0ab75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadee597fb35d2489e4eefc0135c6b726"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadee597fb35d2489e4eefc0135c6b726"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>fLastTickUpdate</b></td></tr>
+<tr class="separator:aadee597fb35d2489e4eefc0135c6b726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84206bf72bbe456160c7df7ad0410e63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a84206bf72bbe456160c7df7ad0410e63"></a>
+EKeshISMPlayUpdateType&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateDuringPlay</b></td></tr>
+<tr class="separator:a84206bf72bbe456160c7df7ad0410e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5170ee04aba421cfde35f67ee555e37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5170ee04aba421cfde35f67ee555e37"></a>
 FName&#160;</td><td class="memItemRight" valign="bottom"><b>Channel</b></td></tr>
 <tr class="separator:ae5170ee04aba421cfde35f67ee555e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +203,12 @@ UStaticMesh *&#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b></td
 TArray&lt; UMaterialInterface * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>MaterialOverrides</b></td></tr>
 <tr class="separator:acc9cffee6412790ade954b52290be5d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a395f2998a2dc5824d6bb5f59c70d2342"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a395f2998a2dc5824d6bb5f59c70d2342"></a>
+static const float&#160;</td><td class="memItemRight" valign="bottom"><b>TIME_BEFORE_TICK_DISABLE</b> = 0.1f</td></tr>
+<tr class="separator:a395f2998a2dc5824d6bb5f59c70d2342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a7154e8226dd93a5741cdfac0c9b87b19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7154e8226dd93a5741cdfac0c9b87b19"></a>
@@ -191,7 +216,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>UKeshISMManager</b><
 <tr class="separator:a7154e8226dd93a5741cdfac0c9b87b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Scene component representing a single instance of the ISM manager. </p>
+<div class="textblock"><p>Scene component representing a single instance of an instanced static mesh. </p>
 
 <p>Definition at line <a class="el" href="_kesh_i_s_m_component_8h_source.html#l00012">12</a> of file <a class="el" href="_kesh_i_s_m_component_8h_source.html">KeshISMComponent.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
@@ -205,7 +230,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>UKeshISMManager</b><
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_u_kesh_i_s_m_component.html">UKeshISMComponent</a></li>
-    <li class="footer">Generated on Sat Jan 16 2016 18:49:17 for Kesh Instance Static Mesh Manager Plugin by
+    <li class="footer">Generated on Tue Jan 19 2016 06:33:47 for Kesh Instance Static Mesh Manager Plugin by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
