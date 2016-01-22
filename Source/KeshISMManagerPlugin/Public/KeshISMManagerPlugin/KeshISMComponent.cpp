@@ -46,6 +46,32 @@ void UKeshISMComponent::PostEditChangeProperty( FPropertyChangedEvent& PropertyC
 	}
 }
 
+
+void UKeshISMComponent::PostEditComponentMove( bool bComplete )
+{
+	Super::PostEditComponentMove( bComplete );
+
+	AActor* Owner = GetOwner();
+
+	if ( Owner == NULL )
+		return;
+
+	UKeshISMManager* Manager = UKeshISMManager::GetInstance();
+
+	if ( Manager == NULL )
+		return;
+
+	for ( UActorComponent* ActorComponent : Owner->GetComponents() )
+	{
+		UKeshISMComponent* KeshISMComponent = Cast<UKeshISMComponent>( ActorComponent );
+
+		if ( KeshISMComponent == NULL )
+			return;
+
+		Manager->UpdateInstanceTransform( KeshISMComponent );
+	}
+}
+
 #endif
 
 

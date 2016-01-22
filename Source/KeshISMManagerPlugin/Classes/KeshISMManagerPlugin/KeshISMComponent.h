@@ -40,7 +40,8 @@ public:
 	virtual void SetMaterialOverride( int32 Index, UMaterialInterface* Material );
 
 #if WITH_EDITOR
-	virtual void PostEditChangeProperty( FPropertyChangedEvent& PropertyChangedEvent );
+	virtual void PostEditChangeProperty( FPropertyChangedEvent& PropertyChangedEvent ) override;
+	virtual void PostEditComponentMove( bool bComplete ) override; // Will help to fix things if realtime is off and the KeshISMComponent is the root.
 #endif
 
 	virtual void PostLoad() override;
